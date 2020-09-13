@@ -1,6 +1,6 @@
 export default {
   widgets: [
-    { name: 'structure-menu' },
+    {name: 'structure-menu'},
     {
       name: 'project-info',
       options: {
@@ -19,7 +19,7 @@ export default {
                 },
                 {
                   buildHookId: '5f5d435ada13e3d703ccc1a4',
-                  title: 'Blog Website',
+                  title: 'Live site',
                   name: 'sanity-gatsby-blog-web-7jgbwkc9',
                   apiId: '218a5cf4-b05e-493f-8de4-144558aeb957'
                 }
@@ -30,18 +30,18 @@ export default {
         data: [
           {
             title: 'GitHub repo',
-            value: 'https://github.com/NeversSync/sanity-gatsby-blog',
+            value: 'https://github.com/NeversSync/Gong-Fu-Tea-Proto',
             category: 'Code'
           },
-          { title: 'Frontend', value: 'https://sanity-gatsby-blog-web-7jgbwkc9.netlify.app', category: 'apps' }
+          {title: 'Frontend', value: 'https://sanity-gatsby-blog-web-7jgbwkc9.netlify.app', category: 'apps'}
         ]
       }
     },
-    { name: 'project-users', layout: { height: 'auto' } },
+    {name: 'project-users', layout: {height: 'auto'}},
     {
       name: 'document-list',
-      options: { title: 'Recent blog posts', order: '_createdAt desc', types: ['post'] },
-      layout: { width: 'medium' }
+      options: {title: 'Recent blog posts', order: '_createdAt desc', types: ['post']},
+      layout: {width: 'medium'}
     }
   ]
 }
