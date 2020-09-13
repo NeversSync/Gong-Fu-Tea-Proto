@@ -10,6 +10,7 @@ import Container from '../components/container'
 import GraphQLErrorList from '../components/graphql-error-list'
 import SEO from '../components/seo'
 import Layout from '../containers/layout'
+import AuthorList from '../components/author-list'
 
 export const query = graphql`
   fragment SanityImage on SanityMainImage {
@@ -40,6 +41,39 @@ export const query = graphql`
       subtitle
       description
       keywords
+    }
+    listings: allSanityListing {
+      edges {
+        node {
+          description
+          title
+          location
+          author {
+            image {
+              crop {
+                _key
+                _type
+                top
+                bottom
+                left
+                right
+              }
+              hotspot {
+                _key
+                _type
+                x
+                y
+                height
+                width
+              }
+              asset {
+                _id
+              }
+            }
+            name
+          }
+        }
+      }
     }
     posts: allSanityPost(
       limit: 6
@@ -82,6 +116,13 @@ const IndexPage = props => {
       .filter(filterOutDocsWithoutSlugs)
       .filter(filterOutDocsPublishedInTheFuture)
     : []
+  const listingNodes = (data || {}).listings
+    ? mapEdgesToNodes(data.listings)
+      .filter(filterOutDocsPublishedInTheFuture)
+    : []
+
+  console.info('listings', listingNodes)
+  // console.info('author', lis)
 
   if (!site) {
     throw new Error(
@@ -105,6 +146,16 @@ const IndexPage = props => {
             nodes={postNodes}
             browseMoreHref='/archive/'
           />
+        )}
+        {listingNodes && (
+          listingNodes.map(listing => (
+            <div>
+              <h3>{listing.title}</h3>
+              <p>{listing.description}</p>
+              <p>{listing.location}</p>
+              {listing.author && <AuthorList singleAuthor={listing.author} title='Author' />}
+            </div>
+          ))
         )}
       </Container>
     </Layout>
